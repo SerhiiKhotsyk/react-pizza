@@ -1,0 +1,56 @@
+@import '../variables';
+
+.categories {
+  @include media('max', 'xl') {
+    margin-bottom: 20px;
+  }
+  @include media('max', 'sm') {
+    width: 100%;
+  }
+  ul {
+    display: flex;
+    @include media('max', 'md') {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: auto;
+      gap: 10px;
+      text-align: center;
+    }
+    @include media('max', 'sm') {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @include media('max', 'xs+') {
+      grid-template-columns: repeat(1, 1fr);
+      width: 100%;
+    }
+
+    li {
+      @include media('max', 'xl') {
+        padding: 10px 20px;
+        border-radius: 20px;
+      }
+
+      background-color: #f9f9f9;
+      padding: 13px 30px;
+      border-radius: 30px;
+      margin-right: 10px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.1s ease-in-out;
+      @include noselect();
+
+      &:hover {
+        background-color: darken(#f9f9f9, 2%);
+      }
+
+      &:active {
+        background-color: darken(#f9f9f9, 5%);
+      }
+
+      &.active {
+        background-color: #282828;
+        color: #fff;
+      }
+    }
+  }
+}

@@ -1,0 +1,25 @@
+@import '../variables';
+
+.not-found {
+  max-width: $container-width;
+  text-align: center;
+  margin: 0 auto;
+  padding: 200px 0 300px;
+  @include media('max', 'sm') {
+    padding: 100px 0 150px;
+  }
+
+  span {
+    font-size: 60px;
+  }
+  p {
+    font-size: 22px;
+  }
+
+  h1 {
+    @include media('max', 'sm') {
+      font-size: 35px;
+      margin-bottom: 20px;
+    }
+  }
+}
