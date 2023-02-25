@@ -1,6 +1,8 @@
 import { useState } from 'react';
 
 const Pagination = ({ pizzaQuantity = 10, portionSize = 5, pageSize = 4, onPageChanged }) => {
+  const [activePage, setActivePage] = useState(1);
+
   let pagesCount = Math.ceil(pizzaQuantity / pageSize);
   let pages = [];
   for (let i = 1; i <= pagesCount; i += 1) {
@@ -11,6 +13,11 @@ const Pagination = ({ pizzaQuantity = 10, portionSize = 5, pageSize = 4, onPageC
   let [portionNumber, setPortionNumber] = useState(1);
   let leftPotionPageNumber = (portionNumber - 1) * portionSize + 1;
   let rightPotionPageNumber = portionNumber * portionSize;
+
+  const handlePageChange = (page) => {
+    setActivePage(page);
+    onPageChanged(page);
+  };
 
   return (
     <div className="pagination">
@@ -29,11 +36,9 @@ const Pagination = ({ pizzaQuantity = 10, portionSize = 5, pageSize = 4, onPageC
         .map((p) => {
           return (
             <span
-              className="pagination__button"
+              className={activePage == p ? 'pagination__button active' : 'pagination__button'}
               key={p}
-              onClick={(e) => {
-                onPageChanged(p);
-              }}>
+              onClick={() => handlePageChange(p)}>
               {p}
             </span>
           );
