@@ -17,38 +17,38 @@ const Home = () => {
   const [pizzas, setPizzas] = useState([]);
   const { searchValue } = useContext(SearchContext);
 
-  let onPageChanged = (page) => {
-    setIsLoading(true);
-    const category = activeCategory > 0 ? `category=${activeCategory}` : '';
-    const sortBy = `&sortBy=${activeSortOption.sortBy}&order=${activeSortOption.order} `;
-    const selectedPage = `&p=${page}`;
-
-    fetch(
-      `https://63f888806978b1f9105b784e.mockapi.io/items?${category}${sortBy}${selectedPage}&l=4`,
-    )
-      .then((resp) => resp.json())
-      .then((data) => {
-        setPizzas(data);
-        setIsLoading(false);
-      });
-  };
-
-  // useEffect(() => {
+  // let onPageChanged = (page) => {
   //   setIsLoading(true);
   //   const category = activeCategory > 0 ? `category=${activeCategory}` : '';
   //   const sortBy = `&sortBy=${activeSortOption.sortBy}&order=${activeSortOption.order} `;
+  //   const selectedPage = `&p=${page}`;
 
-  //   fetch(`https://63f888806978b1f9105b784e.mockapi.io/items?${category}&${sortBy}`)
+  //   fetch(
+  //     `https://63f888806978b1f9105b784e.mockapi.io/items?${category}${sortBy}${selectedPage}&l=4`,
+  //   )
   //     .then((resp) => resp.json())
   //     .then((data) => {
   //       setPizzas(data);
   //       setIsLoading(false);
   //     });
-  // }, [activeCategory, activeSortOption]);
+  // };
 
   useEffect(() => {
-    onPageChanged(1);
+    setIsLoading(true);
+    const category = activeCategory > 0 ? `category=${activeCategory}` : '';
+    const sortBy = `&sortBy=${activeSortOption.sortBy}&order=${activeSortOption.order} `;
+
+    fetch(`https://63f888806978b1f9105b784e.mockapi.io/items?${category}&${sortBy}`)
+      .then((resp) => resp.json())
+      .then((data) => {
+        setPizzas(data);
+        setIsLoading(false);
+      });
   }, [activeCategory, activeSortOption]);
+
+  // useEffect(() => {
+  //   onPageChanged(1);
+  // }, [activeCategory, activeSortOption]);
 
   return (
     <div className="container">
@@ -66,7 +66,7 @@ const Home = () => {
               )
               .map((pizzaObj) => <PizzBlock {...pizzaObj} key={pizzaObj.id} />)}
       </div>
-      <Pagination onPageChanged={onPageChanged} />
+      {/* <Pagination onPageChanged={onPageChanged} /> */}
     </div>
   );
 };
