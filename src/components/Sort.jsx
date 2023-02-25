@@ -1,13 +1,18 @@
 import { useState } from 'react';
 import { TiArrowSortedDown, TiArrowSortedUp } from 'react-icons/ti';
 
-const Sort = () => {
-  const elemList = ['популярностю', 'ціною', 'алфавітом'];
+const Sort = ({ activeSortOption, setActiveSortOption }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [activeOption, setActiveOption] = useState(elemList[0]);
 
-  const handleOption = (option) => {
-    setActiveOption(option);
+  const sortList = [
+    { name: 'популярностю', sortBy: 'rating', order: 'desc' },
+    { name: 'ціною (найдешевші спочатку)', sortBy: 'price', order: 'asc' },
+    { name: 'ціною (найдорожчі спочатку)', sortBy: 'price', order: 'desc' },
+    { name: 'алфавітом', sortBy: 'title', order: 'asc' },
+  ];
+
+  const handleOption = (sortElement) => {
+    setActiveSortOption(sortElement);
     setIsOpen(false);
   };
 
@@ -16,16 +21,16 @@ const Sort = () => {
       <div className="sort__label">
         {isOpen ? <TiArrowSortedDown /> : <TiArrowSortedUp />}
         <b>Сортування за:</b>
-        <span onClick={() => setIsOpen(!isOpen)}>{activeOption}</span>
+        <span onClick={() => setIsOpen(!isOpen)}>{activeSortOption.name}</span>
       </div>
       <div className={isOpen ? 'sort__popup' : 'sort__popup__hidden'}>
         <ul>
-          {elemList.map((option) => (
+          {sortList.map((sortElement) => (
             <li
-              key={option}
-              onClick={(e) => handleOption(option)}
-              className={activeOption === option ? 'active' : ''}>
-              {option}
+              key={sortElement.name}
+              onClick={() => handleOption(sortElement)}
+              className={activeSortOption.name === sortElement.name ? 'active' : ''}>
+              {sortElement.name}
             </li>
           ))}
         </ul>

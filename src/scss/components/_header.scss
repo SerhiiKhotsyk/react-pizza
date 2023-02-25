@@ -12,7 +12,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    @include media('max', 'sm') {
+    @include media('max', 'md') {
       flex-direction: column;
     }
   }
@@ -20,7 +20,7 @@
   &__logo {
     display: flex;
 
-    @include media('max', 'sm') {
+    @include media('max', 'md') {
       margin-bottom: 10px;
     }
 

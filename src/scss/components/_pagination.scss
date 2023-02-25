@@ -1,0 +1,22 @@
+@import '../variables';
+
+.pagination {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  padding-top: 40px;
+  margin: 0 auto;
+  &__button {
+    margin-right: 10px;
+    padding: 5px 10px;
+    border: 1px solid $orange;
+    color: $orange;
+    border-radius: 10px;
+    cursor: pointer;
+    &:hover {
+      background: $orange;
+      color: white;
+    }
+  }
+}
