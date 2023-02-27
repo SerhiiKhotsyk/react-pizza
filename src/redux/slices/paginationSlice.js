@@ -9,7 +9,6 @@ export const getPizzaDataForOnePage = (pizzaData, pageSize, selectedPage) => {
 
 const initialState = {
   pizzaPageData: [],
-  page: 1,
   pageSize: 4,
   activePage: 1,
 };
@@ -20,9 +19,6 @@ const paginationSlice = createSlice({
   reducers: {
     updatePizzaPageData: (state, action) => {
       state.pizzaPageData = action.payload;
-    },
-    updatePage: (state, action) => {
-      state.page = action.payload;
     },
     updateActivePage: (state, action) => {
       state.activePage = action.payload;

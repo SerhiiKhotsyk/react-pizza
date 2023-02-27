@@ -3,6 +3,7 @@ import { useCallback, useRef, useState } from 'react';
 import { BiSearch } from 'react-icons/bi';
 import { IoIosCloseCircleOutline } from 'react-icons/io';
 import { useDispatch } from 'react-redux';
+import { updateActivePage } from '../redux/slices/paginationSlice';
 import { setSearchValue } from '../redux/slices/searchSlice';
 
 const Search = () => {
@@ -24,6 +25,7 @@ const Search = () => {
   const handleInput = (e) => {
     setInputValue(e.target.value);
     debounceInput(inputRef.current.value);
+    dispatch(updateActivePage(1));
   };
 
   const handleClose = () => {

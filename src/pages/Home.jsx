@@ -13,14 +13,14 @@ const Home = () => {
   const { activeCategory, activeSortOption } = useSelector((state) => state.filter);
   const { searchValue } = useSelector((state) => state.search);
   const { status, pizzaData, pizzaQuantity } = useSelector((state) => state.pizza);
-  const { pizzaPageData, pageSize, page } = useSelector((state) => state.pagination);
+  const { pizzaPageData, pageSize, activePage } = useSelector((state) => state.pagination);
   const dispatch = useDispatch();
   const isLoading = status === 'pending' ? true : false;
 
   // при зміні загального масиву піц або сторінки, встановлюємо новий масив піц для цієї сторінки
   useEffect(() => {
-    dispatch(updatePizzaPageData(getPizzaDataForOnePage(pizzaData, pageSize, page)));
-  }, [pizzaData, page]);
+    dispatch(updatePizzaPageData(getPizzaDataForOnePage(pizzaData, pageSize, activePage)));
+  }, [pizzaData, activePage]);
 
   // Робимо запит на сервер з відповідними параметрами
   useEffect(() => {

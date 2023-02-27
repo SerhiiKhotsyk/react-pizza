@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { TiArrowSortedDown, TiArrowSortedUp } from 'react-icons/ti';
 import { useDispatch, useSelector } from 'react-redux';
 import { setActiveSortOption } from '../redux/slices/filterSlice';
+import { updateActivePage } from '../redux/slices/paginationSlice';
 
 const Sort = () => {
   const { activeSortOption } = useSelector((state) => state.filter);
@@ -18,6 +19,7 @@ const Sort = () => {
 
   const handleOption = (sortElement) => {
     dispatch(setActiveSortOption(sortElement));
+    dispatch(updateActivePage(1));
     setIsOpen(false);
   };
 

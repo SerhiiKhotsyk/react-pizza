@@ -30,7 +30,6 @@ const Pagination = ({ pizzaQuantity = 10, portionSize = 5, pageSize = 4 }) => {
   const handlePageChange = (page) => {
     dispatch(updateActivePage(page));
     sessionStorage.setItem('page', String(page));
-    dispatch(updatePage(page));
   };
 
   // якщо всі надані піцци поміщаються на одній сторінці, то пагінація на потрібна
