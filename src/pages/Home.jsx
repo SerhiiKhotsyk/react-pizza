@@ -1,72 +1,51 @@
-import { useContext, useEffect, useState } from 'react';
-import { SearchContext } from '../App';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Categories from '../components/Categories';
+import NotFoundPizza from '../components/NotFoundPizza';
 import Pagination from '../components/Pagination';
 import PizzBlock from '../components/PizzaBlock';
 import Skeleton from '../components/PizzaBlock/Skeleton';
 import Sort from '../components/Sort';
+import { getPizzaDataForOnePage, updatePizzaPageData } from '../redux/slices/paginationSlice';
+import { fetchPizza } from '../redux/slices/pizzaSlice';
 
 const Home = () => {
-  const [activeCategory, setActiveCategory] = useState(0);
-  const [activeSortOption, setActiveSortOption] = useState({
-    name: 'популярностю',
-    sortBy: 'rating',
-    order: 'asc',
-  });
-  const [isLoading, setIsLoading] = useState(true);
-  const [pizzas, setPizzas] = useState([]);
-  const { searchValue } = useContext(SearchContext);
+  const { activeCategory, activeSortOption } = useSelector((state) => state.filter);
+  const { searchValue } = useSelector((state) => state.search);
+  const { status, pizzaData, pizzaQuantity } = useSelector((state) => state.pizza);
+  const { pizzaPageData, pageSize, page } = useSelector((state) => state.pagination);
+  const dispatch = useDispatch();
+  const isLoading = status === 'pending' ? true : false;
 
-  // let onPageChanged = (page) => {
-  //   setIsLoading(true);
-  //   const category = activeCategory > 0 ? `category=${activeCategory}` : '';
-  //   const sortBy = `&sortBy=${activeSortOption.sortBy}&order=${activeSortOption.order} `;
-  //   const selectedPage = `&p=${page}`;
-
-  //   fetch(
-  //     `https://63f888806978b1f9105b784e.mockapi.io/items?${category}${sortBy}${selectedPage}&l=4`,
-  //   )
-  //     .then((resp) => resp.json())
-  //     .then((data) => {
-  //       setPizzas(data);
-  //       setIsLoading(false);
-  //     });
-  // };
-
+  // при зміні загального масиву піц або сторінки, встановлюємо новий масив піц для цієї сторінки
   useEffect(() => {
-    setIsLoading(true);
+    dispatch(updatePizzaPageData(getPizzaDataForOnePage(pizzaData, pageSize, page)));
+  }, [pizzaData, page]);
+
+  // Робимо запит на сервер з відповідними параметрами
+  useEffect(() => {
     const category = activeCategory > 0 ? `category=${activeCategory}` : '';
     const sortBy = `&sortBy=${activeSortOption.sortBy}&order=${activeSortOption.order} `;
+    const search = searchValue ? `&search=${searchValue}` : '';
 
-    fetch(`https://63f888806978b1f9105b784e.mockapi.io/items?${category}&${sortBy}`)
-      .then((resp) => resp.json())
-      .then((data) => {
-        setPizzas(data);
-        setIsLoading(false);
-      });
-  }, [activeCategory, activeSortOption]);
-
-  // useEffect(() => {
-  //   onPageChanged(1);
-  // }, [activeCategory, activeSortOption]);
+    dispatch(fetchPizza({ category, sortBy, search, searchValue }));
+  }, [activeCategory, activeSortOption, searchValue]);
 
   return (
     <div className="container">
       <div className="content__top">
-        <Categories activeCategory={activeCategory} setActiveCategory={setActiveCategory} />
-        <Sort activeSortOption={activeSortOption} setActiveSortOption={setActiveSortOption} />
+        <Categories />
+        <Sort />
       </div>
       <h2 className="content__title">Всі піци</h2>
       <div className="content__items">
         {isLoading
           ? [...new Array(4)].map((_, index) => <Skeleton key={index} />)
-          : pizzas
-              .filter((pizzaObj) =>
-                pizzaObj.title.toLowerCase().includes(searchValue.toLowerCase()),
-              )
-              .map((pizzaObj) => <PizzBlock {...pizzaObj} key={pizzaObj.id} />)}
+          : pizzaPageData.map((pizzaObj) => <PizzBlock {...pizzaObj} key={pizzaObj.id} />)}
       </div>
-      {/* <Pagination onPageChanged={onPageChanged} /> */}
+      {!isLoading && !pizzaPageData.length && <NotFoundPizza />}
+
+      <Pagination pageSize={pageSize} pizzaQuantity={pizzaQuantity} />
     </div>
   );
 };

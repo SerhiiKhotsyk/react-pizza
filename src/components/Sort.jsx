@@ -1,8 +1,13 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { TiArrowSortedDown, TiArrowSortedUp } from 'react-icons/ti';
+import { useDispatch, useSelector } from 'react-redux';
+import { setActiveSortOption } from '../redux/slices/filterSlice';
 
-const Sort = ({ activeSortOption, setActiveSortOption }) => {
+const Sort = () => {
+  const { activeSortOption } = useSelector((state) => state.filter);
+  const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
+  const sortRef = useRef(null);
 
   const sortList = [
     { name: 'популярностю', sortBy: 'rating', order: 'desc' },
@@ -12,12 +17,27 @@ const Sort = ({ activeSortOption, setActiveSortOption }) => {
   ];
 
   const handleOption = (sortElement) => {
-    setActiveSortOption(sortElement);
+    dispatch(setActiveSortOption(sortElement));
     setIsOpen(false);
   };
 
+  // обробляємо клік, якщо клік відбувається не по елементу сорт, то закриваємо попап
+  useEffect(() => {
+    const handleClose = (e) => {
+      if (e.composedPath().includes(sortRef.current)) return;
+      setIsOpen(false);
+    };
+    document.body.addEventListener('click', handleClose);
+
+    // видаляємо прослухохувач при розмонтіровці елемента, якщо не видалити,
+    //  то при наступному рендері цього компонента буде вже два прослуховувача і т.д.
+    return () => {
+      document.body.removeEventListener('click', handleClose);
+    };
+  }, []);
+
   return (
-    <div className="sort">
+    <div className="sort" ref={sortRef}>
       <div className="sort__label">
         {isOpen ? <TiArrowSortedDown /> : <TiArrowSortedUp />}
         <b>Сортування за:</b>
