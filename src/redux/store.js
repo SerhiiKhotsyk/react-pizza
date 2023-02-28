@@ -3,6 +3,7 @@ import filter from './slices/filterSlice';
 import search from './slices/searchSlice';
 import pizza from './slices/pizzaSlice';
 import pagination from './slices/paginationSlice';
+import cart from './slices/cartSlice';
 
 const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
     search,
     pizza,
     pagination,
+    cart,
   },
 });
 

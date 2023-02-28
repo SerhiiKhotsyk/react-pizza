@@ -1,10 +1,25 @@
 import { useState } from 'react';
 import { FiPlus } from 'react-icons/fi';
+import { useDispatch, useSelector } from 'react-redux';
+import { addPoductToCart, remouveCartProduct } from '../../redux/slices/cartSlice';
 
-const PizzBlock = ({ imageUrl, title, types, sizes, price }) => {
+const PizzBlock = ({ id, imageUrl, title, types, sizes, price }) => {
   const [activeType, setActiveType] = useState(0);
   const [activeSize, setActiveSize] = useState(0);
   const typeNames = ['тонке', 'традиційне'];
+  const dispatch = useDispatch();
+  const pizzaCountForCart =
+    useSelector((state) => state.cart.products).find((pizzaObj) => pizzaObj.id === id)?.count || 0;
+
+  const handleAddProduct = () => {
+    const item = { id, imageUrl, title, types, sizes, price };
+    dispatch(addPoductToCart(item));
+  };
+
+  const handleRemouveProduct = () => {
+    const item = { id, imageUrl, title, types, sizes, price };
+    dispatch(remouveCartProduct(item));
+  };
 
   return (
     <div className="pizza-block">
@@ -36,12 +51,14 @@ const PizzBlock = ({ imageUrl, title, types, sizes, price }) => {
         </ul>
       </div>
       <div className="pizza-block__bottom">
-        <div className="pizza-block__price">від {price} грн</div>
-        <div className="button button--outline button--add">
+        <div onClick={handleRemouveProduct} className="pizza-block__price">
+          від {price} грн
+        </div>
+        <button onClick={handleAddProduct} className="button button--outline button--add">
           <FiPlus />
           <span>Додати</span>
-          <i>0</i>
-        </div>
+          <i>{pizzaCountForCart}</i>
+        </button>
       </div>
     </div>
   );
