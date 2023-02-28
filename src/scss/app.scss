@@ -18,6 +18,13 @@ body {
 
   @include media('max', 'lg') {
     width: calc(100vw - 40px);
+    margin: 10px auto;
+  }
+
+  @include media('max', 'sm') {
+    width: 100%;
+    border-radius: 0px;
+    margin: 0px auto;
   }
 }
 
@@ -38,6 +45,8 @@ body {
     grid-template-rows: auto;
     gap: 40px 20px;
     justify-items: center;
+    margin-bottom: 40px;
+
     @include media('max', '2xl') {
       grid-template-columns: repeat(3, 1fr);
     }
