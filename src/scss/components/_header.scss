@@ -3,7 +3,7 @@
 
 .header {
   border-bottom: 1px solid $gray-line;
-  padding: 40px 0;
+  padding: 40px 0 20px;
   @include media('max', 'sm') {
     padding: 20px 0;
   }
@@ -21,7 +21,7 @@
     display: flex;
 
     @include media('max', 'md') {
-      margin-bottom: 10px;
+      margin-bottom: 25px;
     }
 
     img {

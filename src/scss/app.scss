@@ -24,7 +24,7 @@ body {
 .content {
   padding: 40px 0;
 
-  @include media('max', 'sm') {
+  @include media('max', 'md') {
     padding: 20px 0;
   }
 
@@ -72,6 +72,13 @@ body {
     }
     .content__items {
       display: block;
+    }
+  }
+  &__footer {
+    display: flex;
+    justify-content: end;
+    @include media('max', 'md') {
+      justify-content: center;
     }
   }
 }
@@ -149,7 +156,7 @@ body {
     &-1 {
       display: flex;
       width: 40%;
-      @include media('max', 'sm') {
+      @include media('max', 'md') {
         margin-bottom: 25px;
         width: auto;
         align-items: center;
@@ -159,7 +166,7 @@ body {
       display: flex;
       width: 60%;
       justify-content: space-around;
-      @include media('max', 'sm') {
+      @include media('max', 'md') {
         width: 100%;
       }
     }
@@ -168,10 +175,9 @@ body {
   &__item {
     button {
       background: inherit;
-      border: none;
     }
 
-    @include media('max', 'sm') {
+    @include media('max', 'md') {
       flex-direction: column;
       align-items: center;
       justify-content: center;
@@ -232,6 +238,7 @@ body {
       }
 
       b {
+        margin: 0 10px;
         font-size: 22px;
       }
     }
@@ -251,6 +258,7 @@ body {
     }
 
     &-remove {
+      border: none;
       display: flex;
       align-items: center;
       justify-content: flex-end;

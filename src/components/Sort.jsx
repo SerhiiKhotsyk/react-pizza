@@ -41,7 +41,7 @@ const Sort = () => {
   return (
     <div className="sort" ref={sortRef}>
       <div className="sort__label">
-        {isOpen ? <TiArrowSortedDown /> : <TiArrowSortedUp />}
+        {isOpen ? <TiArrowSortedUp /> : <TiArrowSortedDown />}
         <b>Сортування за:</b>
         <span onClick={() => setIsOpen(!isOpen)}>{activeSortOption.name}</span>
       </div>
