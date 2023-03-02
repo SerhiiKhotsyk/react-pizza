@@ -5,17 +5,10 @@ import { setActiveSortOption } from '../redux/slices/filterSlice';
 import { updateActivePage } from '../redux/slices/paginationSlice';
 
 const Sort = () => {
-  const { activeSortOption } = useSelector((state) => state.filter);
+  const { activeSortOption, sortList } = useSelector((state) => state.filter);
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
   const sortRef = useRef(null);
-
-  const sortList = [
-    { name: 'популярностю', sortBy: 'rating', order: 'desc' },
-    { name: 'ціною (найдешевші спочатку)', sortBy: 'price', order: 'asc' },
-    { name: 'ціною (найдорожчі спочатку)', sortBy: 'price', order: 'desc' },
-    { name: 'алфавітом', sortBy: 'title', order: 'asc' },
-  ];
 
   const handleOption = (sortElement) => {
     dispatch(setActiveSortOption(sortElement));

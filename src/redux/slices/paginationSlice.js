@@ -26,6 +26,6 @@ const paginationSlice = createSlice({
   },
 });
 
-export const { updatePizzaPageData, updatePage, updateActivePage } = paginationSlice.actions;
+export const { updatePizzaPageData, updateActivePage } = paginationSlice.actions;
 
 export default paginationSlice.reducer;

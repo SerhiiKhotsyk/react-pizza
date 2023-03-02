@@ -16,6 +16,10 @@ body {
   border-radius: 10px;
   max-width: 1400px;
 
+  @include media('max', '2xl') {
+    max-width: 1100px;
+  }
+
   @include media('max', 'lg') {
     width: calc(100vw - 40px);
     margin: 10px auto;
@@ -48,7 +52,7 @@ body {
     margin-bottom: 40px;
 
     @include media('max', '2xl') {
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
     }
     @include media('max', 'xl') {
       grid-template-columns: repeat(2, 1fr);

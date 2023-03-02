@@ -7,15 +7,27 @@ import {
   clearCart,
   clearCartProduct,
   remouveCartProduct,
+  updateCartState,
 } from '../redux/slices/cartSlice';
+import { getLSCartData, setLSCartData } from '../utils/localStorageRequest';
 
 const Cart = () => {
-  const { products, totalProductQuantity, totaPrice } = useSelector((state) => state.cart);
+  const { products, totalProductQuantity, totalPrice, typeNames } = useSelector(
+    (state) => state.cart,
+  );
   const dispatch = useDispatch();
 
+  // При першій загрузці, беремо стейт з localStorage і встановлюємо в картстейт
   useEffect(() => {
+    dispatch(updateCartState(getLSCartData()));
+
     window.scrollTo(0, 0);
   }, []);
+
+  // при зміні картстейта, заносимо зміни в localStorage
+  useEffect(() => {
+    setLSCartData(products, totalProductQuantity, totalPrice);
+  }, [products]);
 
   if (!totalProductQuantity) {
     return <EmptyCart />;
@@ -54,7 +66,7 @@ const Cart = () => {
                 strokeLinejoin="round"
               />
             </svg>
-            Корзина
+            Кошик
           </h2>
           <button onClick={() => dispatch(clearCart())} className="cart__clear">
             <svg
@@ -92,10 +104,10 @@ const Cart = () => {
                 strokeLinejoin="round"
               />
             </svg>
-            <span>Очистить корзину</span>
+            <span>Очистити корзину</span>
           </button>
         </div>
-        {products.map(({ id, imageUrl, title, types, sizes, price, count }) => {
+        {products.map(({ id, imageUrl, title, actualType, actualSize, price, count }) => {
           return (
             <div key={id} className="content__items">
               <div className="cart__item">
@@ -105,7 +117,9 @@ const Cart = () => {
                   </div>
                   <div className="cart__item-info">
                     <h3>{title}</h3>
-                    <p>тонкое тесто, 26 см.</p>
+                    <p>
+                      {typeNames[actualType]} тісто, {actualSize} см.
+                    </p>
                   </div>
                 </div>
                 <div className="cart__item-block-2">
@@ -184,11 +198,11 @@ const Cart = () => {
           <div className="cart__bottom-details">
             <span>
               {' '}
-              Всего пицц: <b>{totalProductQuantity} шт.</b>{' '}
+              Всього піц: <b>{totalProductQuantity} шт.</b>{' '}
             </span>
             <span>
               {' '}
-              Сумма заказа: <b>{totaPrice} грн</b>{' '}
+              Сума замовлення: <b>{totalPrice} грн</b>{' '}
             </span>
           </div>
           <div className="cart__bottom-buttons">
@@ -207,10 +221,10 @@ const Cart = () => {
                   strokeLinejoin="round"
                 />
               </svg>
-              <span>Вернуться назад</span>
+              <span>Повернутися назад</span>
             </Link>
             <div className="button pay-btn">
-              <span>Оплатить сейчас</span>
+              <span>Оплатити зараз</span>
             </div>
           </div>
         </div>

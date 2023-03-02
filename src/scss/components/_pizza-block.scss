@@ -4,6 +4,7 @@
 .pizza-block {
   width: 280px;
   text-align: center;
+
   @include media('max', 'xs') {
     width: $container-width;
   }

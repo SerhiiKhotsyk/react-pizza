@@ -1,18 +1,20 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateActivePage, updatePage } from '../redux/slices/paginationSlice';
+import { updateActivePage } from '../redux/slices/paginationSlice';
 
 const Pagination = ({ pizzaQuantity = 10, portionSize = 5, pageSize = 4 }) => {
   const { activePage } = useSelector((state) => state.pagination);
-  // const [activePage, setActivePage] = useState(Number(sessionStorage.getItem('page')) || 1);
   const dispatch = useDispatch();
 
+  // визначаємо максимальну к-сть сторінок
   let pagesCount = Math.ceil(pizzaQuantity / pageSize);
   let pages = [];
   for (let i = 1; i <= pagesCount; i += 1) {
     pages.push(i);
   }
 
+  // при першій загрузці сторінки беремо значення активної сторінки з sessionStorage(якщо є)
+  // і оновлюємо activePage в стейті
   useEffect(() => {
     if (sessionStorage.getItem('page')) {
       dispatch(updateActivePage(Number(sessionStorage.getItem('page'))));
@@ -27,6 +29,7 @@ const Pagination = ({ pizzaQuantity = 10, portionSize = 5, pageSize = 4 }) => {
   let leftPotionPageNumber = (portionNumber - 1) * portionSize + 1;
   let rightPotionPageNumber = portionNumber * portionSize;
 
+  // при зміні сторінки, вносимо в стейт та sessionStorage нове значення activePage
   const handlePageChange = (page) => {
     dispatch(updateActivePage(page));
     sessionStorage.setItem('page', String(page));

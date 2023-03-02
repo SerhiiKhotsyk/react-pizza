@@ -6,7 +6,6 @@ import NotFoundPizza from '../components/NotFoundPizza';
 import Pagination from '../components/Pagination';
 import PizzBlock from '../components/PizzaBlock';
 import Skeleton from '../components/PizzaBlock/Skeleton';
-import Search from '../components/Search';
 import Sort from '../components/Sort';
 import { getPizzaDataForOnePage, updatePizzaPageData } from '../redux/slices/paginationSlice';
 import { fetchPizza } from '../redux/slices/pizzaSlice';
