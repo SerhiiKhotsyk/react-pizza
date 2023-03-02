@@ -5,7 +5,7 @@ const initialState = {
   totalProductQuantity: 0,
   totalPrice: 0,
   typeNames: ['тонке', 'традиційне'],
-  priceList: { 26: 1, 30: 1.3, 40: 1.9 },
+  priceList: { 26: 1, 30: 1.2, 40: 1.8 },
 };
 
 const cartSlice = createSlice({

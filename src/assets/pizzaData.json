@@ -5,38 +5,38 @@
     "title": "Пепероні Фреш з перцем",
     "types": [0, 1],
     "sizes": [26, 30, 40],
-    "price": 203,
-    "category": 3,
+    "price": 130,
+    "category": [4],
     "rating": 4
   },
   {
     "id": 1,
     "imageUrl": "https://dodopizza.azureedge.net/static/Img/Products/Pizza/ru-RU/2ffc31bb-132c-4c99-b894-53f7107a1441.jpg",
     "title": "Сирна",
-    "types": [0],
+    "types": [0, 1],
     "sizes": [26, 40],
-    "price": 145,
-    "category": 3,
+    "price": 125,
+    "category": [2],
     "rating": 6
   },
   {
     "id": 2,
     "imageUrl": "https://dodopizza.azureedge.net/static/Img/Products/Pizza/ru-RU/6652fec1-04df-49d8-8744-232f1032c44b.jpg",
     "title": "Курка барбекю",
-    "types": [0],
+    "types": [0, 1],
     "sizes": [26, 40],
-    "price": 195,
-    "category": 1,
+    "price": 145,
+    "category": [1, 3],
     "rating": 4
   },
   {
     "id": 3,
     "imageUrl": "https://dodopizza.azureedge.net/static/Img/Products/Pizza/ru-RU/af553bf5-3887-4501-b88e-8f0f55229429.jpg",
     "title": "Кисло-солодка курка",
-    "types": [1],
+    "types": [0, 1],
     "sizes": [26, 30, 40],
-    "price": 175,
-    "category": 1,
+    "price": 155,
+    "category": [1, 3],
     "rating": 2
   },
   {
@@ -45,18 +45,18 @@
     "title": "Чізбургер-піца",
     "types": [0, 1],
     "sizes": [26, 30, 40],
-    "price": 215,
-    "category": 3,
+    "price": 160,
+    "category": [1, 3],
     "rating": 8
   },
   {
     "id": 5,
     "imageUrl": "https://dodopizza.azureedge.net/static/Img/Products/Pizza/ru-RU/1e1a6e80-b3ba-4a44-b6b9-beae5b1fbf27.jpg",
     "title": "Крейзі пепероні",
-    "types": [0],
+    "types": [0, 1],
     "sizes": [30, 40],
-    "price": 280,
-    "category": 4,
+    "price": 175,
+    "category": [4],
     "rating": 2
   },
   {
@@ -65,8 +65,8 @@
     "title": "Пепероні",
     "types": [0, 1],
     "sizes": [26, 30, 40],
-    "price": 275,
-    "category": 1,
+    "price": 125,
+    "category": [4],
     "rating": 9
   },
   {
@@ -76,7 +76,7 @@
     "types": [0, 1],
     "sizes": [26, 30, 40],
     "price": 150,
-    "category": 4,
+    "category": 2,
     "rating": 10
   },
   {
@@ -85,8 +85,8 @@
     "title": "Чотири сезони",
     "types": [0, 1],
     "sizes": [26, 30, 40],
-    "price": 195,
-    "category": 1,
+    "price": 165,
+    "category": [1],
     "rating": 10
   },
   {
@@ -95,8 +95,8 @@
     "title": "Овочі та гриби 🌱",
     "types": [0, 1],
     "sizes": [26, 30, 40],
-    "price": 185,
-    "category": 2,
+    "price": 110,
+    "category": [2],
     "rating": 7
   },
   {
@@ -105,38 +105,38 @@
     "title": "Чотири сири",
     "types": [0, 1],
     "sizes": [26, 30, 40],
-    "price": 203,
-    "category": 2,
+    "price": 160,
+    "category": [2],
     "rating": 4
   },
   {
     "id": 11,
     "imageUrl": "https://images.pizza33.ua/products/product/poWeFA6eLHlDqOCA8mMzp1ZZy1Jcfqfm.jpg",
     "title": "Копертіно Соле",
-    "types": [0],
+    "types": [0, 1],
     "sizes": [26, 40],
-    "price": 145,
-    "category": 5,
+    "price": 210,
+    "category": [1, 5],
     "rating": 6
   },
   {
     "id": 12,
     "imageUrl": "https://images.pizza33.ua/products/product/S6SEc5RvQjYpS0VJbqkkUdoTkMTXKAe7.jpg",
     "title": "Вегетаріанська",
-    "types": [0],
+    "types": [0, 1],
     "sizes": [26, 40],
-    "price": 195,
-    "category": 1,
+    "price": 115,
+    "category": [2],
     "rating": 4
   },
   {
     "id": 13,
     "imageUrl": "https://images.pizza33.ua/products/product/m0JGsuHe13JdmMiCYuSNMtoOrcWY0tWU.jpg",
     "title": "Байрактар",
-    "types": [1],
+    "types": [0, 1],
     "sizes": [26, 30, 40],
     "price": 175,
-    "category": 2,
+    "category": [1, 3],
     "rating": 2
   },
   {
@@ -145,18 +145,18 @@
     "title": "Верона",
     "types": [0, 1],
     "sizes": [26, 30, 40],
-    "price": 215,
-    "category": 3,
+    "price": 140,
+    "category": [1, 3],
     "rating": 8
   },
   {
     "id": 15,
     "imageUrl": "https://images.pizza33.ua/products/product/zXPTrRvb1XINm6kK5IQl7B2zp137dtT3.jpg",
     "title": "Мексиканська",
-    "types": [0],
+    "types": [0, 1],
     "sizes": [30, 40],
-    "price": 280,
-    "category": 4,
+    "price": 150,
+    "category": [1, 4],
     "rating": 2
   },
   {
@@ -165,8 +165,8 @@
     "title": "Кальцоне Б'янка",
     "types": [0, 1],
     "sizes": [26, 30, 40],
-    "price": 275,
-    "category": 5,
+    "price": 150,
+    "category": [1, 5],
     "rating": 9
   },
   {
@@ -175,8 +175,8 @@
     "title": "Гавайська Преміум",
     "types": [0, 1],
     "sizes": [26, 30, 40],
-    "price": 150,
-    "category": 4,
+    "price": 170,
+    "category": [1, 4],
     "rating": 10
   },
   {
@@ -186,7 +186,7 @@
     "types": [0, 1],
     "sizes": [26, 30, 40],
     "price": 195,
-    "category": 1,
+    "category": [1, 3],
     "rating": 10
   },
   {
@@ -196,7 +196,7 @@
     "types": [0, 1],
     "sizes": [26, 30, 40],
     "price": 185,
-    "category": 5,
+    "category": [1, 4],
     "rating": 7
   }
 ]

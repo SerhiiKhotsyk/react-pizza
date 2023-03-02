@@ -104,7 +104,7 @@ const Cart = () => {
                 strokeLinejoin="round"
               />
             </svg>
-            <span>Очистити корзину</span>
+            <span>Очистити кошик</span>
           </button>
         </div>
         {products.map(({ id, imageUrl, title, actualType, actualSize, price, count }) => {
