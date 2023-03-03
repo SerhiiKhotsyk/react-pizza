@@ -1,20 +1,20 @@
+import React from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import EmptyCart from '../components/EmptyCart';
+import { selectCart } from '../redux/slices/cart/selectors';
 import {
   addPoductToCart,
   clearCart,
   clearCartProduct,
   remouveCartProduct,
   updateCartState,
-} from '../redux/slices/cartSlice';
+} from '../redux/slices/cart/slice';
 import { getLSCartData, setLSCartData } from '../utils/localStorageRequest';
 
-const Cart = () => {
-  const { products, totalProductQuantity, totalPrice, typeNames } = useSelector(
-    (state) => state.cart,
-  );
+const Cart: React.FC = () => {
+  const { products, totalProductQuantity, totalPrice, typeNames } = useSelector(selectCart);
   const dispatch = useDispatch();
 
   // При першій загрузці, беремо стейт з localStorage і встановлюємо в картстейт
@@ -145,7 +145,19 @@ const Cart = () => {
                     </button>
                     <b>{count}</b>
                     <button
-                      onClick={() => dispatch(addPoductToCart({ id, price }))}
+                      onClick={() =>
+                        dispatch(
+                          addPoductToCart({
+                            id,
+                            imageUrl,
+                            title,
+                            actualType,
+                            actualSize,
+                            price,
+                            count,
+                          }),
+                        )
+                      }
                       className="button button--outline button--circle cart__item-count-plus">
                       <svg
                         width="10"
@@ -165,10 +177,10 @@ const Cart = () => {
                     </button>
                   </div>
                   <div className="cart__item-price">
-                    <b>{price * count} грн</b>
+                    <b>{price * (count || 1)} грн</b>
                   </div>
                   <button
-                    onClick={() => dispatch(clearCartProduct({ id }))}
+                    onClick={() => dispatch(clearCartProduct(id))}
                     className="cart__item-remove">
                     <div className="button button--outline button--circle">
                       <svg

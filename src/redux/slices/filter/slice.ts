@@ -1,6 +1,7 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { IFilteState, SortListType } from './types';
 
-const initialState = {
+const initialState: IFilteState = {
   categories: ['Всі', "М'ясні", 'Вегетаріанська', 'Гриль', 'Гострі', 'Закриті'],
   activeCategory: 0,
   activeSortOption: {
@@ -20,10 +21,10 @@ const filterSlice = createSlice({
   name: 'filter',
   initialState,
   reducers: {
-    setActiveCategory(state, action) {
+    setActiveCategory(state, action: PayloadAction<number>) {
       state.activeCategory = action.payload;
     },
-    setActiveSortOption(state, action) {
+    setActiveSortOption(state, action: PayloadAction<SortListType>) {
       state.activeSortOption = action.payload;
     },
   },

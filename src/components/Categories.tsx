@@ -1,15 +1,17 @@
+import React from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setActiveCategory } from '../redux/slices/filterSlice';
-import { updateActivePage } from '../redux/slices/paginationSlice';
+import { setActiveCategory } from '../redux/slices/filter/slice';
+import { updateActivePage } from '../redux/slices/pagination/slice';
 import { TiArrowSortedDown, TiArrowSortedUp } from 'react-icons/ti';
+import { selectFilter } from '../redux/slices/filter/selectors';
 
 const Categories = () => {
-  const { activeCategory, categories } = useSelector((state) => state.filter);
+  const { activeCategory, categories } = useSelector(selectFilter);
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleActiveCategory = (categoryIndex) => {
+  const handleActiveCategory = (categoryIndex: number): void => {
     dispatch(setActiveCategory(categoryIndex));
     dispatch(updateActivePage(1));
   };

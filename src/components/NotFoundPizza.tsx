@@ -1,4 +1,6 @@
-const NotFoundPizza = () => {
+import React from 'react';
+
+const NotFoundPizza: React.FC = () => {
   return (
     <div className="not-found-pizza">
       <span>😕</span>

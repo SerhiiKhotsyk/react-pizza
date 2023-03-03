@@ -1,12 +1,14 @@
+import React from 'react';
 import { useEffect } from 'react';
 import { IoMdCart } from 'react-icons/io';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { updateCartState } from '../redux/slices/cartSlice';
+import { selectCart } from '../redux/slices/cart/selectors';
+import { updateCartState } from '../redux/slices/cart/slice';
 import { getLSCartData, setLSCartData } from '../utils/localStorageRequest';
 
-const CartButton = () => {
-  const { totalPrice, totalProductQuantity, products } = useSelector((state) => state.cart);
+export const CartButton: React.FC = () => {
+  const { totalPrice, totalProductQuantity, products } = useSelector(selectCart);
   const dispatch = useDispatch();
 
   // При першій загрузці, беремо стейт з localStorage і встановлюємо в картстейт

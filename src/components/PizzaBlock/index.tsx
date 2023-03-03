@@ -1,31 +1,43 @@
+import React from 'react';
 import { useState } from 'react';
 import { FiPlus } from 'react-icons/fi';
 import { useDispatch, useSelector } from 'react-redux';
-import { addPoductToCart } from '../../redux/slices/cartSlice';
+import { selectCart } from '../../redux/slices/cart/selectors';
+import { addPoductToCart } from '../../redux/slices/cart/slice';
+import { PizzaCartType, PriceListType } from '../../redux/slices/cart/types';
+import { PizzaType } from '../../redux/slices/pagination/types';
 
-const PizzBlock = ({ id, imageUrl, title, types, sizes, price }) => {
-  const { typeNames, priceList, products } = useSelector((state) => state.cart);
+const PizzBlock: React.FC<PizzaType> = ({ id, imageUrl, title, types, sizes, price }) => {
+  const { typeNames, priceList, products } = useSelector(selectCart);
   const dispatch = useDispatch();
 
   // задаємо актуальні: розмір, тип і ціну, для кожного нового обєкта, який будемо додавати до кошику
   const [actualPrice, setActualPrice] = useState(price);
-  const [actualSize, setActualSize] = useState(26);
-  const [actualType, setActualType] = useState(0);
-  const [newId, setNewId] = useState(`${id}_size=${26}&_type=${0}`);
+  const [actualSize, setActualSize] = useState(sizes[0]);
+  const [actualType, setActualType] = useState(types[0]);
+  const [newId, setNewId] = useState(`${id}_size=${actualSize}&_type=${0}`);
 
   // беремо із стейту к-сть піц певного id (для кнопки "Додати")
-  const pizzaCountForCart = products.find((pizzaObj) => pizzaObj.id === newId)?.count || 0;
+  const pizzaCountForCart: number =
+    products.find((pizzaObj: PizzaCartType) => pizzaObj.id === newId)?.count || 0;
 
   // додаємо обєкт піци із визначенними параметрами до кошика (до масиву cart.products)
-  const handleAddProduct = () => {
-    const item = { id: newId, imageUrl, title, actualType, actualSize, price: actualPrice };
+  const handleAddProduct = (): void => {
+    const item: PizzaCartType = {
+      id: newId,
+      imageUrl,
+      title,
+      actualType,
+      actualSize,
+      price: actualPrice,
+    };
     dispatch(addPoductToCart(item));
   };
 
   // при зміні розміру піци, встановлюємо відповідні id, ціну та розмір
-  const handleActiveSize = (pizzaSize) => {
+  const handleActiveSize = (pizzaSize: number): void => {
     // коеф. ціни на піцу в залежності від її розмірів
-    const priceCoef = priceList[pizzaSize];
+    const priceCoef: number = priceList[String(pizzaSize) as keyof PriceListType];
 
     setNewId(`${id}_size=${pizzaSize}&_type=${actualType}`);
     setActualPrice(Math.ceil(price * priceCoef));
@@ -33,7 +45,7 @@ const PizzBlock = ({ id, imageUrl, title, types, sizes, price }) => {
   };
 
   // при зміні типу тіста піци, встановлюємо відповідні id та тип тіста
-  const handleActiveType = (pizzaType) => {
+  const handleActiveType = (pizzaType: number) => {
     setNewId(`${id}_size=${actualSize}&_type=${pizzaType}`);
     setActualType(pizzaType);
   };

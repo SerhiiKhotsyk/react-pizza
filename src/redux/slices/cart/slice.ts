@@ -1,20 +1,22 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { CartLSDataType } from '../../../utils/localStorageRequest';
+import { ICartState, PizzaCartType } from './types';
 
-const initialState = {
+const initialState: ICartState = {
   products: [],
   totalProductQuantity: 0,
   totalPrice: 0,
   typeNames: ['тонке', 'традиційне'],
-  priceList: { 26: 1, 30: 1.2, 40: 1.8 },
+  priceList: { '26': 1, '30': 1.2, '40': 1.8 },
 };
 
 const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    addPoductToCart: (state, action) => {
+    addPoductToCart: (state, action: PayloadAction<PizzaCartType>) => {
       const findItem = state.products.find((obj) => obj.id === action.payload.id);
-      if (findItem) {
+      if (findItem?.count) {
         findItem.count++;
       } else {
         state.products.push({
@@ -25,14 +27,14 @@ const cartSlice = createSlice({
       state.totalPrice += action.payload.price;
       state.totalProductQuantity += 1;
     },
-    remouveCartProduct: (state, action) => {
+    remouveCartProduct: (state, action: PayloadAction<{ id: string; price: number }>) => {
       const findItem = state.products.find((obj) => obj.id === action.payload.id);
-      if (findItem?.count > 1) {
+      if (findItem?.count && findItem?.count > 1) {
         findItem.count--;
-      } else if (findItem?.count <= 1) {
+      } else if (findItem?.count && findItem?.count <= 1) {
         state.products = state.products.filter((obj) => obj.id !== findItem.id);
       }
-      if (findItem?.count > 0) {
+      if (findItem?.count && findItem?.count > 0) {
         state.totalPrice -= action.payload.price;
         state.totalProductQuantity -= 1;
       }
@@ -42,13 +44,15 @@ const cartSlice = createSlice({
       state.totalPrice = 0;
       state.totalProductQuantity = 0;
     },
-    clearCartProduct: (state, action) => {
-      const findItem = state.products.find((obj) => obj.id === action.payload.id);
-      state.totalPrice = state.totalPrice - findItem.price * findItem.count;
-      state.totalProductQuantity = state.totalProductQuantity - findItem.count;
-      state.products = state.products.filter((obj) => obj.id !== findItem.id);
+    clearCartProduct: (state, action: PayloadAction<string>) => {
+      const findItem = state.products.find((obj) => obj.id === action.payload);
+      if (findItem?.count) {
+        state.totalPrice = state.totalPrice - findItem.price * findItem.count;
+        state.totalProductQuantity = state.totalProductQuantity - findItem.count;
+        state.products = state.products.filter((obj) => obj.id !== findItem.id);
+      }
     },
-    updateCartState: (state, action) => {
+    updateCartState: (state, action: PayloadAction<CartLSDataType>) => {
       state.products = action.payload.products;
       state.totalProductQuantity = action.payload.totalProductQuantity;
       state.totalPrice = action.payload.totalPrice;
